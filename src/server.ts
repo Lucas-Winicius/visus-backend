@@ -10,7 +10,7 @@ export const app = fastify();
 app.register(routes);
 app.register(cors, {});
 
-app.listen({ port }, (err, address) => {
+app.listen({ port, host: '0.0.0.0' }, (err, address) => {
   if (err) {
     console.error(err);
     process.exit(1);
