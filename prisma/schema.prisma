@@ -17,7 +17,9 @@ datasource db {
 model User {
   id        Int      @id @default(autoincrement())
   name      String
-  email     String   @unique
+  username  String
+  email     String?  @unique
+  role      Role     @default(USER)
   images    Image[]
   likes     Like[]
   createdAt DateTime @default(now())
@@ -32,6 +34,7 @@ model Image {
   title        String?
   description  String?
   location     String?
+  tags         String[]
   views        Int      @default(0)
   uploadedBy   User     @relation(fields: [uploadedById], references: [id])
   uploadedById Int
@@ -51,4 +54,9 @@ model Like {
 
   @@unique([userId, imageId])
   @@map("likes")
+}
+
+enum Role {
+  USER
+  ADMIN
 }
