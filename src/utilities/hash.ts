@@ -14,3 +14,24 @@ export async function hash(text: string) {
     }
   }
 }
+
+export async function verify(hash: string, plainText: string) {
+  try {
+    if (await argon2.verify(hash, plainText)) {
+      return {
+        success: true,
+        match: true,
+      }
+    } else {
+      return {
+        success: true,
+        match: false,
+      }
+    }
+  } catch (err) {
+    return {
+      success: false,
+      err,
+    }
+  }
+}
