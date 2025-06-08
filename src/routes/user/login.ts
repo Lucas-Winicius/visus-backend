@@ -39,11 +39,7 @@ export default async function login(app: FastifyInstance) {
           message: 'Invalid credentials',
         })
 
-      const token = generate({
-        name: query.name,
-        username: query.username,
-        email: query.email,
-      })
+      const token = generate(query.id)
 
       return reply
         .status(200)

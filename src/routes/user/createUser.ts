@@ -23,12 +23,8 @@ export default async function post(app: FastifyInstance) {
       },
     })
 
-    const token = generate({
-      name: query.name,
-      username: query.username,
-      email: query.email,
-    })
-
+    const token = generate(query.id)
+    
     return reply
       .status(201)
       .headers({

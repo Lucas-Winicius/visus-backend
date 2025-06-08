@@ -19,8 +19,9 @@ CREATE TABLE "users" (
 CREATE TABLE "images" (
     "id" SERIAL NOT NULL,
     "url" TEXT NOT NULL,
-    "title" TEXT,
-    "description" TEXT,
+    "title" TEXT NOT NULL,
+    "description" TEXT NOT NULL,
+    "slug" TEXT NOT NULL,
     "location" TEXT,
     "tags" TEXT[],
     "views" INTEGER NOT NULL DEFAULT 0,
