@@ -11,3 +11,7 @@ export const createImage = z.object({
   tags: z.string().array(),
   views: z.int().default(0),
 })
+
+export const getImagesSchema = z.object({
+  token: z.string().optional().default(''),
+})
