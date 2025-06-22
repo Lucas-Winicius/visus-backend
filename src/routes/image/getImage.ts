@@ -1,5 +1,7 @@
 import { FastifyReply, FastifyInstance, FastifyRequest } from 'fastify'
 import prisma from '../../database/database'
+import { getImagesSchema } from './schema'
+import { verifyUserRole } from '../user/User.method'
 
 interface GetImageParams {
   slug: string
@@ -12,6 +14,12 @@ export default async function getImage(app: FastifyInstance) {
       request: FastifyRequest<{ Params: GetImageParams }>,
       reply: FastifyReply
     ) => {
+      const data = await getImagesSchema.safeParseAsync(request.query)
+      const userRole = await verifyUserRole(
+        ['ADMIN', 'USER'],
+        data.data?.token || ''
+      )
+
       const slug = request.params.slug
       const image = await prisma.image.findFirst({
         where: {
@@ -42,6 +50,15 @@ export default async function getImage(app: FastifyInstance) {
           message: 'image not found',
         })
 
+      const like = await prisma.like.findUnique({
+        where: {
+          userId_imageId: {
+            userId: userRole.id || 0,
+            imageId: image.id,
+          },
+        },
+      })
+
       await prisma.image.update({
         where: {
           id: image.id,
@@ -51,7 +68,7 @@ export default async function getImage(app: FastifyInstance) {
         },
       })
 
-      return reply.send(image)
+      return reply.send({...image, liked: !!like})
     }
   )
 }
