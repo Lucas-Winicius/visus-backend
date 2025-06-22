@@ -1,7 +1,7 @@
 import prisma from '../../database/database'
 import { verify } from '../../utilities/tokens'
 
-export async function verifyUserRole(role: string, token: string) {
+export async function verifyUserRole(roles: string[], token: string) {
   const auth = verify(token)
 
   if (!auth.success) return { match: false, id: null }
@@ -23,7 +23,7 @@ export async function verifyUserRole(role: string, token: string) {
   })
 
   if (!user) return { match: false, id: null }
-  if (user.role === role) return { match: true, id: user.id }
+  if (roles.includes(user.role)) return { match: true, id: user.id }
 
   return { match: false, id: null }
 }

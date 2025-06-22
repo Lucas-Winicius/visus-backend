@@ -14,7 +14,7 @@ export default async function postImage(app: FastifyInstance) {
       })
     }
 
-    const userRole = await verifyUserRole('ADMIN', data.data.token)
+    const userRole = await verifyUserRole(['ADMIN'], data.data.token)
 
     if (!userRole.match)
       return reply.status(401).send({
