@@ -26,7 +26,7 @@ export default async function getImages(app: FastifyInstance) {
         },
       },
       orderBy: {
-        id: 'asc'
+        id: 'desc'
       }
     })
 
