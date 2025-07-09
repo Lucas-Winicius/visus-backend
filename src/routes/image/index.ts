@@ -6,9 +6,9 @@ import incrementView from './incrementView'
 import postImages from './postImage'
 
 export default async function ImageRoutes() {
+  app.register(incrementView)
   app.register(postImages)
   app.register(getImages)
   app.register(getImagesByTime)
   app.register(getImage)
-  app.register(incrementView)
 }
