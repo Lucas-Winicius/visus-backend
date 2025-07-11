@@ -12,7 +12,7 @@ services:
       sh -c "
         npx prisma migrate deploy &&
         npx prisma generate &&
-        node dist/index.js
+        node dist/server.js
       "
 
   database:
