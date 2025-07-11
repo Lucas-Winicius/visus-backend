@@ -35,9 +35,9 @@ export default async function getImages(app: FastifyInstance) {
       select: { imageId: true },
     })
 
-    const likedImageIds = new Set(userLikes.map((like) => like.imageId))
+    const likedImageIds = new Set(userLikes.map((like: { imageId: unknown }) => like.imageId))
 
-    const imagesWithLiked = images.map((image) => ({
+    const imagesWithLiked = images.map((image: { id: unknown }) => ({
       ...image,
       liked: likedImageIds.has(image.id),
     }))
