@@ -41,7 +41,7 @@ import { verifyUserRole } from '../user/User.method'
         select: { imageId: true },
       })
 
-      const likedImageIds = new Set(userLikes.map((like) => like.imageId))
+      const likedImageIds = new Set(userLikes.map((like: { imageId: unknown }) => like.imageId))
 
       const likeCounts = await prisma.like.groupBy({
         by: ['imageId'],
@@ -51,7 +51,7 @@ import { verifyUserRole } from '../user/User.method'
       })
 
       const likeCountMap = new Map<number, number>()
-      likeCounts.forEach(({ imageId, _count }) => {
+      likeCounts.forEach(({ imageId, _count }: {imageId: number, _count: { imageId: number }}) => {
         likeCountMap.set(imageId, _count.imageId)
       })
 
