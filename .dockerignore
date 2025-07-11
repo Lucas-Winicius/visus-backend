@@ -1,0 +1,28 @@
+# Ignora dependências locais (serão instaladas no container)
+node_modules
+dist
+.prisma
+
+# Arquivos de configuração e cache
+.env
+.env.*
+*.log
+*.tsbuildinfo
+
+# Ignora o lockfile de outras ferramentas
+yarn.lock
+pnpm-lock.yaml
+
+# Ignora arquivos de editor/IDE
+.vscode
+.idea
+
+# Ignora arquivos de sistema
+.DS_Store
+Thumbs.db
+
+# Ignora testes (se não quiser incluir)
+__tests__/
+tests/
+*.spec.ts
+*.test.ts

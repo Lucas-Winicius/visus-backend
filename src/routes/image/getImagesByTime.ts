@@ -3,7 +3,7 @@ import prisma from '../../database/database'
 import { getImagesSchema } from './schema'
 import { verifyUserRole } from '../user/User.method'
 
-export default async function getImagesByTime(app: FastifyInstance) {
+  export default async function getImagesByTime(app: FastifyInstance) {
   app.get(
     '/imagesByTime',
     async (request: FastifyRequest, reply: FastifyReply) => {
@@ -60,7 +60,7 @@ export default async function getImagesByTime(app: FastifyInstance) {
         {
           year: number
           month: number
-          images: any[]
+          images: unknown[]
         }
       > = {}
 
